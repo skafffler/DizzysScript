@@ -1605,7 +1605,7 @@ TrashTalkTab:AddSlider('SpamChatSpeed', {Text = 'speed:',Suffix = "s", Default =
 WaitTime = SpamChatSpeedValue
 end)
 
-TrashTalkTab:AddInput('ChatSpammer', {Default = "If you cant beat them join them [.gg/⭐PATRICK.CC⭐] on top!", Numeric = false, Finished = true, Text = 'chat spammer:', Placeholder = "Chat Spam Custom Text [HERE]"}):OnChanged(function(value)
+TrashTalkTab:AddInput('ChatSpammer', {Default = "skafff.skid kinda owns everyone", Numeric = false, Finished = true, Text = 'chat spammer:', Placeholder = "Chat Spam Custom Text [HERE]"}):OnChanged(function(value)
 chatSpammerText = value
 end)
 
