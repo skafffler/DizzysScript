@@ -1609,6 +1609,14 @@ TrashTalkTab:AddInput('ChatSpammer', {Default = "If you cant beat them join them
 chatSpammerText = value
 end)
 
+Misc:AddToggle('',{Text='Freeze',Default=false}):AddKeyPicker('', {Default='Non',SyncToggleState=true,Mode='Toggle',Text='Freeze',NoUI=false}):OnChanged(function(Value)
+if Value then
+CharcaterMiddle.Anchored = true
+else
+CharcaterMiddle.Anchored = false
+end
+end)
+
 local CustomSkyTabBox = Tabs.Visuals:AddLeftTabbox('lighting')
 local CustomSkyTab = CustomSkyTabBox:AddTab('lighting')
 
