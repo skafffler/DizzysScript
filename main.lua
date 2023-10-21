@@ -549,7 +549,7 @@ end
 table.insert(Esp.Drawings,drawing)
 return drawing
 end
-InventoryViewer.Background = Functions:Draw("Square",{Visible=false,Position=Vector2.new((workspace.CurrentCamera.ViewportSize.X-350)/2,10),Size=Vector2.new(355,195),Transparency=.75,Filled=true,Thickness=0,Color=Color3.fromRGB(7.5,7.5,7.5),ZIndex=-1})
+InventoryViewer.Background = Functions:Draw("Circle",{Visible=false,Position=Vector2.new((workspace.CurrentCamera.ViewportSize.X-350)/2,10),Size=Vector2.new(355,195),Transparency=.75,Filled=true,Thickness=0,Color=Color3.fromRGB(7.5,7.5,7.5),ZIndex=-1})
 InventoryViewer.TopLine = Functions:Draw("Line",{Visible=false,From=Vector2.new(InventoryViewer.Background.Position.X, InventoryViewer.Background.Position.Y),To=Vector2.new(InventoryViewer.Background.Position.X + InventoryViewer.Background.Size.X, InventoryViewer.Background.Position.Y),Thickness=1.5,ZIndex=0,Color=Color3.fromRGB(208,123,255)})
 function InventoryViewer:CreateText(IsTitle,String,SlightIndex)
 DrawingText = Functions:Draw("Text",{Visible=false,Position=Vector2.new(InventoryViewer.Background.Position.X+14,(InventoryViewer.Background.Position.Y+28)+((#InventoryViewer.Texts - 1)*18)),Outline=true,Center=false,Font=0,Size=15,Text=String,Color=Color3.fromRGB(255,255,255)})
