@@ -112,95 +112,51 @@ AspectRatioTab:AddSlider('RatioValue', {Text = 'aspect ratio:',Suffix = "%", Def
 StretchValue = Slider
 end)
 
-    local HeadHitboxTabBox = Tabs.Combat:AddLeftTabbox('head hitbox')
-    local HeadHitboxTab = HeadHitboxTabBox:AddTab('head hitbox')
-    
-    local antihitbox
-    antihitbox = hookmetamethod(game, "__index", newcclosure(function(...)
+local HeadHitboxTabBox = Tabs.Combat:AddLeftTabbox()
+local HeadHitboxTab = HeadHitboxTabBox:AddTab('Hitbox')
+
+local antihitbox
+antihitbox = hookmetamethod(game, "__newindex", newcclosure(function(...)
     local self, k = ...
     if not checkcaller() and k == "Size" and self.Name == "Head" then
-      return Vector3.new(1.672248125076294, 0.835624098777771, 0.835624098777771)
+        return Vector3.new(1.672248125076294, 0.835624098777771, 0.835624098777771)
     end
     return antihitbox(...)
-    end))
-    
-    --* Head Hitbox Expander *--
-    
-    local HedsOn = Instance.new("Part")
-    HedsOn.Name = "HedsOn"
-    HedsOn.Anchored = false
-    HedsOn.CanCollide = false
-    HedsOn.Transparency = 0
-    HedsOn.Size = Vector3.new(10, 10, 10)
-    HedsOn.Parent = game.ReplicatedStorage
-    
-    local HeadExtends = false
-    local XSize = 10
-    local YSize = 10
-    local ZSize = 10
-    local HitboxTransparency = 10
-    
-    HeadHitboxTab:AddToggle('HBO',{Text='enabled',Default=false}):OnChanged(function(Value)
-    HeadExtends = Value
-    end)
-    
-    HeadHitboxTab:AddSlider('HitboxXSize_Slider', {Text = 'hitbox width:', Default = 5, Min = 0, Max = 10, Rounding = 2, Suffix = "%", Compact = false}):OnChanged(function(HitboxXSize)
-    XSize = HitboxXSize
-    end)
-    
-    HeadHitboxTab:AddSlider('HitboxYSize_Slider', {Text = 'hitbox height:', Default = 5, Min = 0, Max = 10, Rounding = 2, Suffix = "%", Compact = false}):OnChanged(function(HitboxYSize)
-    YSize = HitboxYSize
-    end)
-    
-    HeadHitboxTab:AddSlider('HitboxXSize_Slider', {Text = 'transparency:', Default = 10, Min = 0, Max = 60, Rounding = 0, Suffix = "%", Compact = false}):OnChanged(function(TransparencyValue)
-    HitboxTransparency = TransparencyValue / 100
-    end)
-    
-    task.spawn(function()
-    while task.wait() do
-      if HeadExtends then
-        for _, i in ipairs(game:GetService("Workspace"):GetChildren()) do
-          if i:FindFirstChild("HumanoidRootPart") and not i:FindFirstChild("HedsOn") then
-            local BigHeadsPart = Instance.new("Part")
-            BigHeadsPart.Name = "Head"
-            BigHeadsPart.Anchored = false
-            BigHeadsPart.CanCollide = false
-            BigHeadsPart.Transparency = HitboxTransparency
-            BigHeadsPart.Size = Vector3.new(XSize, YSize, ZSize)
-            local DeletePart = Instance.new("Weld")
-            DeletePart.Parent = BigHeadsPart
-            DeletePart.Name = "FAKEHEAD"
-            local HeadsParts = BigHeadsPart:Clone()
-            HeadsParts.Parent = i
-            HeadsParts.Orientation = i.HumanoidRootPart.Orientation
-            local clonedHedsOn = HedsOn:Clone()
-            clonedHedsOn.Parent = i
-            local Headswelding = Instance.new("Weld")
-            Headswelding.Parent = HeadsParts
-            Headswelding.Part0 = i.HumanoidRootPart
-            Headswelding.Part1 = HeadsParts
-            HeadsParts.Position = Vector3.new(i.HumanoidRootPart.Position.X, i.HumanoidRootPart.Position.Y - 0.6, i.HumanoidRootPart.Position.Z)
-          end
-        end
-      else
-        for _, i in ipairs(game:GetService("Workspace"):GetChildren()) do
-          if i:FindFirstChild("HumanoidRootPart") and i:FindFirstChild("HedsOn") then
-            i.HedsOn:Remove()
-            for _, a in ipairs(i:GetChildren()) do
-              if a.Name == "Head" and a:FindFirstChild("FAKEHEAD") and (not a:FindFirstChild("Nametag") or not a:FindFirstChild("Face")) then
-                a:Remove()
-              end
+end))
+
+local HitBX = 2
+local HitBY = 2
+local HitBZ = 2
+
+HeadHitboxTab:AddToggle('EnabledHB', { Text = 'Enabled', Default = false, Tooltip = nil, })
+Toggles.EnabledHB:OnChanged(function(EnabledHBB)
+    if EnabledHBB == true then
+        for v, i in pairs(workspace:GetChildren()) do
+            if i:FindFirstChild("HumanoidRootPart") then
+                i.Head.Size = Vector3.new(HitBX, HitBY, HitBZ)
             end
-          end
         end
-      end
+        game.ReplicatedStorage.Player.Head.Size = Vector3.new(HitBX, HitBY, HitBZ)
+    elseif EnabledHBB == false then
+        for v, i in pairs(workspace:GetChildren()) do
+            if i:FindFirstChild("HumanoidRootPart") then
+                i.Head.Size = Vector3.new(1.672248125076294, 0.835624098777771, 0.835624098777771)
+            end
+        end
+        game.ReplicatedStorage.Player.Head.Size = Vector3.new(1.672248125076294, 0.835624098777771, 0.835624098777771)
     end
-    end)
-    
+end)
 
+HeadHitboxTab:AddSlider('HitboxXSize_Slider', {Text = 'X-Size', Default = 2, Min = 0, Max = 8, Rounding = 2, Suffix = "%", Compact = false}):OnChanged(function(HitboxXSize)
+    HitBX = HitboxXSize
+end)
 
+HeadHitboxTab:AddSlider('HitboxYSize_Slider', {Text = 'Y-Size', Default = 2, Min = 0, Max = 8, Rounding = 2, Suffix = "%", Compact = false}):OnChanged(function(HitboxYSize)
+    HitBY = HitboxYSize
+end)
 
-
+HeadHitboxTab:AddSlider('HitboxZSize_Slider', {Text = 'Z-Size', Default = 2, Min = 0, Max = 8, Rounding = 2, Suffix = "%", Compact = false}):OnChanged(function(HitboxZSize)
+    HitBZ = HitboxZSize
 
 
 
