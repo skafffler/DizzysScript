@@ -1,4 +1,34 @@
-  --// Locals
+G.Key = "key"
+-- // Whitelist's Main Code
+local hnmXBTNrJdsD934sEVnD = {"key"MintyPubOnTop","","","","","","","","","","","","",""}
+local oHqkFBUiYMWoBRZ0r4Zl = false
+
+function CheckKey(allah)
+for ,keys in pairs(hnmXBTNrJdsD934sEVnD) do
+if allah == keys then
+return true
+    end
+  end
+end
+
+oHqkFBUiYMWoBRZ0r4Zl = CheckKey(_G.Key)
+wait(0.1)
+
+
+
+else
+  print("Hwid is Invalid")
+end
+print("Key is valid!")
+else oHqkFBUiYMWoBRZ0r4Zl = false 
+-- // Invalid Key Code
+print("Key is invalid")
+end
+
+
+
+
+--// Locals
   local Camera = game:GetService("Workspace").Camera
   local Camera = game:GetService("Workspace").CurrentCamera
   local Cam = game:GetService("Workspace").Camera
