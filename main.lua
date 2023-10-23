@@ -1,33 +1,36 @@
-G.Key = "key"
+local keys = {
+    "MINTYPUBONTOP",
+    "skafff",
+    "patrickSKIDS"
+}
 
--- // Whitelist's Main Code
-local hnmXBTNrJdsD934sEVnD = {"MINTYPUBONTOP","","","","","","","","","","","","",""}
-local oHqkFBUiYMWoBRZ0r4Zl = false
-
-function CheckKey(allah)
-for ,keys in pairs(hnmXBTNrJdsD934sEVnD) do
-if allah == keys then
-return true
+local counter = 1
+local keyCheck
+for i,v in pairs(keys) do
+    if counter == #keys then
+    --not whitelisted!
+    keys = ""
+    game.Players.LocalPlayer:Kick("Not a valid key!")
+    else
+        if v == _G.Key then
+            --Whitelisted!
+            print("Successfully whitelisted!")
+            keyCheck = _G.Key
+            keys = ""
+        else
+            counter = counter +1
+        end
     end
-  end
 end
 
-oHqkFBUiYMWoBRZ0r4Zl = CheckKey(_G.Key)
-wait(0.1)
-
-
-
-else
-  print("Hwid is Invalid")
+while true do
+    if _G.Key == keyCheck then
+        --Not spoofed
+    else
+        game.Players.LocalPlayer:Kick("Do not try and spoof your key!")
+    end
+    wait()
 end
-print("Key is valid!")
-else oHqkFBUiYMWoBRZ0r4Zl = false 
--- // Invalid Key Code
-print("Key is invalid")
-end
-
-
-
 
 --// Locals
   local Camera = game:GetService("Workspace").Camera
