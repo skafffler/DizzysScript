@@ -1,3 +1,5 @@
+G.Key = "key"
+
 -- // Whitelist's Main Code
 local hnmXBTNrJdsD934sEVnD = {"MINTYPUBONTOP","","","","","","","","","","","","",""}
 local oHqkFBUiYMWoBRZ0r4Zl = false
