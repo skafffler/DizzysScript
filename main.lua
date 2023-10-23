@@ -1,5 +1,5 @@
 -- // Whitelist's Main Code
-local hnmXBTNrJdsD934sEVnD = {"key"MintyPubOnTop","","","","","","","","","","","","",""}
+local hnmXBTNrJdsD934sEVnD = {"MINTYPUBONTOP","","","","","","","","","","","","",""}
 local oHqkFBUiYMWoBRZ0r4Zl = false
 
 function CheckKey(allah)
